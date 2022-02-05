@@ -1,0 +1,5 @@
+
+**/.vagrant
+.idea/
+terraform
+.DS_Store

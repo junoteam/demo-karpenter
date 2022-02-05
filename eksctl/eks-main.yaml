@@ -1,0 +1,32 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: demo-cluster
+  region: us-east-1
+  version: "1.21"
+availabilityZones: 
+- us-east-1a
+- us-east-1b
+- us-east-1c
+managedNodeGroups:
+- name: on-demand
+  labels:
+    role: on-demand
+  instanceType: t2.small
+  amiFamily: AmazonLinux2
+  desiredCapacity: 1
+  minSize: 1
+  maxSize: 10
+  volumeSize: 20
+- name: spot
+  spot: true
+  labels:
+    role: spot
+  instanceType: t2.small
+  desiredCapacity: 2
+  minSize: 1
+  maxSize: 10
+  volumeSize: 20
+iam:
+  withOIDC: true
