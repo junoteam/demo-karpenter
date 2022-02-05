@@ -1,0 +1,8 @@
+README.md
+__pycache__
+.gitignore
+Makefile
+README.md
+.env*
+.devcontainer
+docker-compose.*
