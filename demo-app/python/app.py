@@ -10,7 +10,7 @@ DEBUG = os.environ.get('DEBUG')
 
 app = Flask(__name__)
 
-def alex():
+def make_load():
     def f(x):
         # Put any cpu (only) consuming operation here. I have given 1 below -
         while True:
@@ -28,7 +28,7 @@ def george():
 
 @app.route('/start', methods = ['GET', 'POST'])
 def start_load():
-    alex()
+    make_load()
     return 'Kick my grandma in the ankle!'
 
 @app.route('/stop', methods = ['GET', 'POST'])

@@ -1,0 +1,16 @@
+{{- if .Values.targetgroupbinding.enabled -}}
+{{- $fullName := include "argocd.fullname" . -}}
+apiVersion: elbv2.k8s.aws/v1beta1
+kind: TargetGroupBinding
+metadata:
+  name: {{ $fullName }}
+  {{- with .Values.targetgroupbinding.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  serviceRef:
+    name: "{{ $fullName }}-argocd-server"
+    port: {{ index .Values "argo-cd" "server" "service" "servicePortHttp" }}
+  targetGroupARN: {{ .Values.targetgroupbinding.targetgroup.arn }}
+{{- end }}
